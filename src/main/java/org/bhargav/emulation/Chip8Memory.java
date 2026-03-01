@@ -22,7 +22,7 @@ public class Chip8Memory {
         }
     }
 
-    public void load(File romFile) throws IOException {
+    public int load(File romFile) throws IOException {
         BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(romFile));
 
         byte[] fileContent = bufferedInputStream.readAllBytes();
@@ -30,5 +30,7 @@ public class Chip8Memory {
         for (int i = 0; i < fileContent.length; i++) {
             memory[PROGRAM_START + i] = fileContent[i];
         }
+
+        return fileContent.length;
     }
 }

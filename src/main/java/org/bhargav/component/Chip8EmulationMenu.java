@@ -1,11 +1,9 @@
-package org.bhargav.ui;
+package org.bhargav.component;
 
 import org.bhargav.Chip8Root;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class Chip8EmulationMenu extends JMenu {
     private JMenuItem debugger;

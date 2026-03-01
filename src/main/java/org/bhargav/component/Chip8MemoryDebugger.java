@@ -1,9 +1,10 @@
-package org.bhargav.ui;
+package org.bhargav.component;
 
 import org.bhargav.Chip8Root;
 import org.bhargav.emulation.Chip8Memory;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Chip8MemoryDebugger extends JDialog {
 
@@ -18,8 +19,13 @@ public class Chip8MemoryDebugger extends JDialog {
         super(root);
         this.memory = memory;
 
+        Font mono = new Font("Monospaced", Font.PLAIN, 14);
+
         memoryTable = new JTable(ROWS, COLS);
-        this.add(memoryTable);
+        memoryTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        memoryTable.setFont(mono);
+        JScrollPane scrollPane = new JScrollPane(memoryTable);
+        this.add(scrollPane);
 
         setSize(500, 400);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

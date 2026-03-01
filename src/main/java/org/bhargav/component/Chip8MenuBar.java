@@ -1,4 +1,4 @@
-package org.bhargav.ui;
+package org.bhargav.component;
 
 import org.bhargav.Chip8Root;
 

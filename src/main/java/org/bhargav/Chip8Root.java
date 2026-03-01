@@ -1,9 +1,10 @@
 package org.bhargav;
 
+import org.bhargav.component.Chip8Display;
+import org.bhargav.component.Chip8StatusBar;
 import org.bhargav.emulation.Chip8Memory;
-import org.bhargav.ui.Chip8MemoryDebugger;
-import org.bhargav.ui.Chip8MenuBar;
-import org.bhargav.ui.Chip8StatusBar;
+import org.bhargav.component.Chip8MemoryDebugger;
+import org.bhargav.component.Chip8MenuBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,8 @@ import java.io.IOException;
 public class Chip8Root extends JFrame {
 
     private Chip8Memory memory;
+    private Chip8Display display;
+    private Chip8StatusBar statusBar;
 
     public Chip8Root() throws HeadlessException {
         super("Chip-8 Emu");
@@ -22,8 +25,12 @@ public class Chip8Root extends JFrame {
         this.setLayout(new BorderLayout());
 
         Chip8MenuBar menuBar = new Chip8MenuBar(this);
+        display = new Chip8Display();
+        statusBar = new Chip8StatusBar(this);
 
         this.setJMenuBar(menuBar);
+        this.add(display, BorderLayout.CENTER);
+        this.add(statusBar, BorderLayout.SOUTH);
 
         memory = new Chip8Memory();
     }
@@ -32,7 +39,8 @@ public class Chip8Root extends JFrame {
         memory.clear();
 
         try {
-            memory.load(romFile);
+            int bytesRead = memory.load(romFile);
+            statusBar.updateMessage(bytesRead + " bytes read from " + romFile.getName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
