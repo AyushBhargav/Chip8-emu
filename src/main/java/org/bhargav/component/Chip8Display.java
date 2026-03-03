@@ -18,4 +18,12 @@ public class Chip8Display extends JPanel {
         setBackground(new Color(15, 40, 15));
         setDoubleBuffered(true);
     }
+
+    public void clearBuffer() {
+        for (int i = 0; i < DISPLAY_ROWS; i++) {
+            for (int j = 0; j < DISPLAY_COLS; j++) {
+                displayBuffer[i][j] = false;
+            }
+        }
+    }
 }

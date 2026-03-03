@@ -3,8 +3,9 @@ package org.bhargav;
 import org.bhargav.component.Chip8Display;
 import org.bhargav.component.Chip8StatusBar;
 import org.bhargav.emulation.Chip8Memory;
-import org.bhargav.component.Chip8MemoryDebugger;
+import org.bhargav.component.Chip8Debugger;
 import org.bhargav.component.Chip8MenuBar;
+import org.bhargav.emulation.Chip8Register;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class Chip8Root extends JFrame {
 
     private Chip8Memory memory;
+    private Chip8Register register;
     private Chip8Display display;
     private Chip8StatusBar statusBar;
 
@@ -33,6 +35,7 @@ public class Chip8Root extends JFrame {
         this.add(statusBar, BorderLayout.SOUTH);
 
         memory = new Chip8Memory();
+        register = new Chip8Register();
     }
 
     public void loadRom(File romFile) {
@@ -47,6 +50,6 @@ public class Chip8Root extends JFrame {
     }
 
     public void openDebuggerWindow() {
-        new Chip8MemoryDebugger(memory, this).setVisible(true);
+        new Chip8Debugger(memory, register, this).setVisible(true);
     }
 }
